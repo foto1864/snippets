@@ -19,8 +19,6 @@ export default function SplitPDF() {
     }
   };
 
-
-
   const handleConvert = async () => {
     if (!pdfBuffer) {
       setStatus("Please upload a PDF file first.");

@@ -9,25 +9,25 @@ export default function JpgToPdf() {
   const [previewUrls, setPreviewUrls] = useState([]);
 
   const handleImageSelect = (e) => {
-  const files = Array.from(e.target.files).filter(f =>
-    f.type === "image/jpeg" || f.type === "image/png"
-  );
+    const files = Array.from(e.target.files).filter(f =>
+      f.type === "image/jpeg" || f.type === "image/png"
+    );
 
-  if (files.length === 0) {
-    setStatus("No valid images selected.");
-    setImageFiles([]);
-    setDownloadUrl(null);
-    setPreviewUrls([]);
-    return;
-  }
+    if (files.length === 0) {
+      setStatus("No valid images selected.");
+      setImageFiles([]);
+      setDownloadUrl(null);
+      setPreviewUrls([]);
+      return;
+    }
 
-  setImageFiles(files);
-  setStatus(`${files.length} image(s) loaded.`);
+    setImageFiles(files);
+    setStatus(`${files.length} image(s) loaded.`);
 
-  // Generate object URLs for preview
-  const urls = files.map(file => URL.createObjectURL(file));
-  setPreviewUrls(urls);
-};
+    // Generate object URLs for preview
+    const urls = files.map(file => URL.createObjectURL(file));
+    setPreviewUrls(urls);
+  };
 
 
   const handleConvert = async () => {
