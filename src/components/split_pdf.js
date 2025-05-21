@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { PDFDocument } from 'pdf-lib';
+import './global.css'
 
 export default function SplitPDF() {
   const [pdfBuffer, setPdfBuffer] = useState(null);
@@ -9,12 +10,16 @@ export default function SplitPDF() {
 
   const handleFileSelect = async (e) => {
     const file = e.target.files[0];
-    if (!file) return;
-    const buffer = await file.arrayBuffer();
-    setPdfBuffer(buffer);
-    setStatus(`PDF loaded: ${file.name}`);
-    setDownloadLinks([]);
+    if (file) {
+      const buffer = await file.arrayBuffer();     // ✅ wait for the data
+      setPdfBuffer(buffer);                        // ✅ set actual data, not a promise
+      setStatus(`Selected: ${file.name}`);
+    } else {
+      setStatus("No file selected.");
+    }
   };
+
+
 
   const handleConvert = async () => {
     if (!pdfBuffer) {
@@ -69,35 +74,68 @@ export default function SplitPDF() {
   };
 
   return (
-    <div>
-      <h2>Split PDF</h2>
+    <div className="whole-page">
 
-      <input type="file" accept="application/pdf" onChange={handleFileSelect} /><br /><br />
+      <div className="div1"></div>
 
-      <input
-        type="text"
-        value={ranges}
-        onChange={e => setRanges(e.target.value)}
-        placeholder="[1,2]; [3,4]"
-        style={{ width: "300px" }}
-      /><br /><br />
+      <div className="mainframe">
+        <h2>Split PDF</h2>
 
-      <button onClick={handleConvert}>Convert</button><br /><br />
+        <p class="inner-paragraph">This specific module is designed to help the user split a PDF file into multiple ones. If you have a PDF, 
+          and you want to extract only specific pages, you can select the ranges you would like to have at the end.  
+          <br />
+          <br />
+          For example, say you want to extract pages 2 through 5. You type [2,5] in the box below and click convert.
+          For single pages, the range can be used as [x,x], so if you want to extract only the 3rd page, you select
+          [3,3] as a range. What is more, both methods can be combined, since the user can select more than 1 range.
+          For example, selecting: "[1,2]; [3,4]; [5,5]", 3 files are created. One containing pages 1 & 2, another
+          containing pages 3 & 4, and finally one containing only the 5th page of the document.
+          <br />
+          <br />
+          All ranges must be seperated with a semicolon ";" except for the last one.
+        </p>
 
-      <div><strong>Status:</strong> {status}</div><br />
+        <div className="file-upload">
+          <label htmlFor="file-upload" className="choose-file">Choose PDF</label>
+          <input
+            id="file-upload"
+            type="file"
+            accept="application/pdf"
+            onChange={handleFileSelect}
+            style={{ display: 'none' }}
+          />
+        </div>  
 
-      {downloadLinks.length > 0 && (
-        <div>
-          <strong>Download:</strong>
-          <ul>
-            {downloadLinks.map((file, index) => (
-              <li key={index}>
-                <a href={file.url} download={file.name}>{file.name}</a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+        <input
+          type="text"
+          value={ranges}
+          onChange={e => setRanges(e.target.value)}
+          placeholder="Enter range in the form: [1,2]; [3,4]"
+          className="ranges-textbox"
+        />
+        
+        <br/><br/>
+
+        <button className="inner-buttons"onClick={handleConvert}>Convert</button><br /><br />
+
+        <div><strong>Status:</strong> {status}</div><br />
+
+        {downloadLinks.length > 0 && (
+          <div>
+            <strong>Download:</strong>
+            <ul>
+              {downloadLinks.map((file, index) => (
+                <li key={index}>
+                  <a className="download-files" href={file.url} download={file.name}>{file.name}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+
+      <div className="div1"></div>
+
     </div>
   );
 }

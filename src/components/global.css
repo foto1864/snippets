@@ -1,0 +1,132 @@
+/*CSS file for dashboard.js, split_pdf.js and jpg_to_pdf.js*/
+
+.mainframe {
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mainframe h1 {
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.mainframe h2 {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.mainframe p {
+    font-size: 20px;
+    padding-left: 50px;
+    padding-right: 50px;
+    text-align: justify;
+    margin-bottom: 80px;
+}
+
+.inner-paragraph {
+    font-size: 16px !important;
+    margin-bottom: 50px !important;
+}
+
+.whole-page {
+    display: flex;
+    flex-direction: row;
+}
+
+.div1 {
+    width: 250px !important;
+    background-color: #f4f4f4;
+}
+
+.main-buttons {
+    background-color: #6d96de;
+    color: white;
+    font-size: 30px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    border: none;
+    padding: 10px;
+    width: 200px;
+    font-weight: 700;
+    transition: transform 0.2s ease; 
+}
+
+.main-buttons:hover{
+    cursor: pointer;
+    transform: scale(0.98);
+}
+
+.choose-file {
+  background-color: #6d96de;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: bold;
+  text-align: center;
+  user-select: none;
+  transition: transform 0.2s ease; 
+}
+
+.choose-file:hover {
+    cursor: pointer;
+    transform: scale(0.98);
+}
+
+.ranges-textbox {
+    margin-top: 30px;
+    width: 300px;
+    height: 40px;
+    font-size: 18px;
+}
+
+
+.inner-buttons {
+    background-color: #6d96de;
+    color: white;
+    font-size: 20px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    border: none;
+    padding: 10px;
+    width: 150px;
+    font-weight: 700;
+    transition: transform 0.2s ease; 
+}
+
+.inner-buttons:hover{
+    cursor: pointer;
+    transform: scale(0.98);
+}
+
+.download-files {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    background-color: lightgray;
+}
+
+.mainframe ul li {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.image-preview-gallery {
+  margin-top: 20px;
+}
+
+.image-preview-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.preview-image {
+  width: 100px;
+  height: auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}

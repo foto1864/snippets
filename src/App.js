@@ -15,7 +15,7 @@ function App() {
       <div className="app-container">
         <header className="main-header">
           <div className="logo">
-            <h1>Code Snippets</h1>
+            <Link to="/" className="logo-title">Code Snippets</Link>
             <img src={convertIcon} alt="Logo" className="logo-icon" />
           </div>
 

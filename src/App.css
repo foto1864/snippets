@@ -7,6 +7,8 @@
 }
 
 .main-content {
+  display: flex;
+  justify-content: center;
   flex: 1;
 }
 
@@ -15,16 +17,11 @@
   padding-right: 300px;
   padding-top: 10px;
   padding-bottom: 10px;
-  background-color: white;
-  color: #333;
+  background-color: #fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.main-header h1 {
-  margin: 0;
-  font-size: 35px;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1); /* subtle bottom shadow */
 }
 
 .header-link {
@@ -41,15 +38,23 @@
 .main-footer {
   text-align: center;
   padding: 15px;
-  background-color: #f1f1f1;
   color: #555;
   font-size: 0.9em;
   border-top: 1px solid #ddd;
+  box-shadow: 0 -5px 5px rgba(0, 0, 0, 0.05); /* subtle bottom shadow */
 }
 
 .logo {
   display: flex;
   align-items: center;
+}
+
+.logo-title {
+  margin: 0;
+  color: #6d96de;
+  font-size: 30px;
+  font-weight: 600;
+  text-decoration: none;
 }
 
 .logo-icon {
