@@ -1,0 +1,9 @@
+/*CSS file for dashboard.js*/
+
+.dashboard-mainframe {
+    background-color: red;
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
