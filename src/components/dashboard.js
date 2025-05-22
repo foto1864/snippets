@@ -18,6 +18,7 @@ export default function Dashboard() {
           You can select your desired function from the menu below. Thank you!</p>
         <button class="main-buttons" onClick={() => navigate("/split")}>Split PDF</button>
         <button class="main-buttons" onClick={() => navigate("/convert")}>JPG to PDF</button>
+        <button class="main-buttons" onClick={() => navigate("/merge")}>Merge PDF</button>
       </div>
 
       <div class="div1"></div>
