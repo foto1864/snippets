@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { PDFDocument } from 'pdf-lib';
 import './global.css';
 
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+
 export default function MergePDF() {
   const [pdfFiles, setPdfFiles] = useState([]);
   const [status, setStatus] = useState("No PDF files selected.");
@@ -9,18 +11,33 @@ export default function MergePDF() {
 
   const handleFileSelect = async (e) => {
     const files = Array.from(e.target.files).filter(f => f.type === "application/pdf");
+    const filesWithId = files.map((file, index) => ({
+      file,
+      name: file.name,
+      id: crypto.randomUUID?.() || `${file.name}-${index}-${performance.now()}`
+    }));
 
-    if (files.length === 0) {
+    if (filesWithId.length === 0) {
       setStatus("No valid PDF files selected.");
       setPdfFiles([]);
       setDownloadUrl(null);
       return;
     }
 
-    setPdfFiles(files);
-    setStatus(`${files.length} PDF(s) loaded.`);
+    setPdfFiles(filesWithId);
+    setStatus(`${filesWithId.length} PDF(s) loaded.`);
     setDownloadUrl(null);
   };
+
+
+  const onDragEnd = (result) => {
+    if (!result.destination) return;
+    const newList = Array.from(pdfFiles);
+    const [moved] = newList.splice(result.source.index, 1);
+    newList.splice(result.destination.index, 0, moved);
+    setPdfFiles(newList);
+  };
+
 
   const handleMerge = async () => {
     if (pdfFiles.length === 0) {
@@ -32,12 +49,13 @@ export default function MergePDF() {
 
     const mergedPdf = await PDFDocument.create();
 
-    for (const file of pdfFiles) {
+    for (const { file } of pdfFiles) {
       const arrayBuffer = await file.arrayBuffer();
       const pdf = await PDFDocument.load(arrayBuffer);
       const copiedPages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
       copiedPages.forEach(page => mergedPdf.addPage(page));
     }
+
 
     const pdfBytes = await mergedPdf.save();
     const blob = new Blob([pdfBytes], { type: "application/pdf" });
@@ -74,6 +92,41 @@ export default function MergePDF() {
         </div>
 
         <br />
+
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Droppable droppableId="pdfList" direction="horizontal">
+            {(provided) => (
+              <div
+                className="pdf-list"
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+              >
+                {pdfFiles.length > 0 ? (
+                  pdfFiles.map((pdf, index) => (
+                    <Draggable key={pdf.id} draggableId={pdf.id} index={index}>
+                      {(provided) => (
+                        <div
+                          className="pdf-item"
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                        >
+                          {pdf.name}
+                        </div>
+                      )}
+                    </Draggable>
+                  ))
+                ) : (
+                  <div style={{ padding: '20px', color: '#999' }}>No files selected.</div>
+                )}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
+
+
+
 
         <button className="inner-buttons" onClick={handleMerge}>Merge</button><br /><br />
 
