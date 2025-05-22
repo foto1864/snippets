@@ -10,6 +10,7 @@ import MergePDF from './components/merge_pdf';
 import SvgToJpg from './components/svg_to_jpg';
 import WebpToJpg from './components/webp_to_jpg';
 import PngToJpg from './components/png_to_jpg';
+import JpgToPng from './components/jpg_to_png';
 
 import './App.css';
 import './components/global.css'; // assuming you have header CSS there
@@ -42,11 +43,12 @@ function App() {
               </span>
               <div className="dropdown-menu">
                 <Link to="/split-pdf" className="dropdown-item">Split PDF</Link>
-                <Link to="/jpg-to-pdf" className="dropdown-item">JPG to PDF</Link>
                 <Link to="/merge-pdf" className="dropdown-item">Merge PDF</Link>
+                <Link to="/jpg-to-pdf" className="dropdown-item">JPG to PDF</Link>
                 <Link to="/svg-to-jpg" className="dropdown-item">SVG To JPG</Link>
                 <Link to="/webp-to-jpg" className="dropdown-item">WEBP To JPG</Link>
                 <Link to="/png-to-jpg" className="dropdown-item">PNG To JPG</Link>
+                <Link to="/jpg-to-png" className="dropdown-item">JPG to PNG</Link>
               </div>
             </div>
           </nav>
@@ -62,6 +64,7 @@ function App() {
             <Link to="/svg-to-jpg" className="header-link" onClick={() => setIsMobileMenuOpen(false)}>SVG to JPG</Link>
             <Link to="/webp-to-jpg" className="header-link" onClick={() => setIsMobileMenuOpen(false)}>WEBP to JPG</Link>
             <Link to="/png-to-jpg" className="header-link" onClick={() => setIsMobileMenuOpen(false)}>PNG to JPG</Link>
+            <Link to="/jpg-to-png" className="header-link" onClick={() => setIsMobileMenuOpen(false)}>JPG to PNG</Link>
           </div>
         )}
 
@@ -74,6 +77,7 @@ function App() {
             <Route path="/svg-to-jpg" element={<SvgToJpg />} />
             <Route path="/webp-to-jpg" element={<WebpToJpg />} />
             <Route path="/png-to-jpg" element={<PngToJpg />} />
+            <Route path="/jpg-to-png" element={<JpgToPng />} />
           </Routes>
         </main>
 

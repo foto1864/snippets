@@ -16,12 +16,16 @@ export default function Dashboard() {
           The first one allows the user to input a PDF file and split it into custom ranges.
           The second one allows the user to input an image file such as JPG or PNG and convert it into a PDF.
           You can select your desired function from the menu below. Thank you!</p>
+          <div className='my-selectors'>
         <button class="main-buttons" onClick={() => navigate("/split-pdf")}>Split PDF</button>
-        <button class="main-buttons" onClick={() => navigate("/jpg-to-pdf")}>JPG to PDF</button>
         <button class="main-buttons" onClick={() => navigate("/merge-pdf")}>Merge PDF</button>
+        <button class="main-buttons" onClick={() => navigate("/jpg-to-pdf")}>JPG to PDF</button>
         <button class="main-buttons" onClick={() => navigate("/svg-to-jpg")}>SVG to JPG</button>
         <button class="main-buttons" onClick={() => navigate("/webp-to-jpg")}>WEBP to JPG</button>
         <button class="main-buttons" onClick={() => navigate("/png-to-jpg")}>PNG to JPG</button>
+        <button class="main-buttons" onClick={() => navigate("/jpg-to-png")}>JPG to PNG</button>
+          </div>
+
       </div>
 
       <div class="div1"></div>

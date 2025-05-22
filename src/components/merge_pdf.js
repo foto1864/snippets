@@ -1,15 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { PDFDocument } from 'pdf-lib';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import './global.css';
 
 export default function MergePDF() {
-
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
 
   const [pdfFiles, setPdfFiles] = useState([]);
   const [status, setStatus] = useState("No PDF files selected.");
@@ -58,14 +51,6 @@ export default function MergePDF() {
 
     setDownloadUrl(url);
     setStatus("Merge complete.");
-  };
-
-  const onDragEnd = (result) => {
-    if (!result.destination) return;
-    const items = Array.from(pdfFiles);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-    setPdfFiles(items);
   };
 
   return (

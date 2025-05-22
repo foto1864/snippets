@@ -340,3 +340,22 @@
     display: flex;
   }
 }
+
+.my-selectors {
+  display: grid;
+  grid-template-columns: repeat(3, 200px);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .my-selectors {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .my-selectors {
+    grid-template-columns: 1fr;
+  }
+}
